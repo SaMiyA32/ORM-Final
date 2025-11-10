@@ -21,7 +21,6 @@ import lk.ijse.elitedrivingschool.dto.tm.StudentTM;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDate;
-import java.util.Collections;
 import java.util.List;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -35,7 +34,6 @@ public class ManageStudentFromController {
     private ListView<CourseTM> listCourseId;
 
     StudentBO studentBO =(StudentBO) BOFactory.getInstance().getBO(BOFactory.BOTypes.STUDENT);
-    LessonBO lessonBO = (LessonBO) BOFactory.getInstance().getBO(BOFactory.BOTypes.LESSON);
     CourseBO courseBO = (CourseBO) BOFactory.getInstance().getBO(BOFactory.BOTypes.COURSE);
 
     @FXML
@@ -224,7 +222,7 @@ public class ManageStudentFromController {
             btnUser.setDisable(false);
 
         } else if ("user".equalsIgnoreCase(role)) {
-            btnAddPatient.setDisable(false);
+            //btnAddPatient.setDisable(false);
             btnUpdatePatient.setDisable(false);
             btnDeletePatient.setDisable(false);
             btnStudent.setDisable(false);

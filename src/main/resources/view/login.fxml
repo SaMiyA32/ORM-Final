@@ -13,7 +13,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.elitedrivingschool.controller.loginController">
+<AnchorPane fx:id="ancParent" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.elitedrivingschool.controller.loginController">
    <children>
       <VBox alignment="CENTER" layoutX="5.0" layoutY="5.0" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #282875;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -21,7 +21,7 @@
             <Label />
             <Label />
             <Label />
-            <Label text="&quot;CLEAN EYE&quot;">
+            <Label text="&quot;ELITE DRIVING SCHOOL&quot;">
                <font>
                   <Font name="Franklin Gothic Heavy" size="36.0" />
                </font>
@@ -43,30 +43,6 @@
                </textFill>
                <VBox.margin>
                   <Insets bottom="10.0" />
-               </VBox.margin>
-            </Label>
-            <Label text="Eye Clinic Management Systerm">
-               <font>
-                  <Font name="Franklin Gothic Heavy" size="22.0" />
-               </font>
-               <textFill>
-                  <LinearGradient endX="1.0" endY="1.0" startX="1.0">
-                     <stops>
-                        <Stop>
-                           <color>
-                              <Color red="1.0" green="1.0" blue="1.0" />
-                           </color>
-                        </Stop>
-                        <Stop offset="1.0">
-                           <color>
-                              <Color red="1.0" green="1.0" blue="1.0" />
-                           </color>
-                        </Stop>
-                     </stops>
-                  </LinearGradient>
-               </textFill>
-               <VBox.margin>
-                  <Insets bottom="30.0" />
                </VBox.margin>
             </Label>
             <Label />

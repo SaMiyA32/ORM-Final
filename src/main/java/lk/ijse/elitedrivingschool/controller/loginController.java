@@ -21,19 +21,80 @@ public class loginController {
     private Button loginBtn;
 
     @FXML
+    private AnchorPane ancParent;
+
+    @FXML
     private TextField password;
 
     @FXML
     private TextField userName;
 
-    @FXML
-    private AnchorPane ancParent;
-
     private final UserBO userBO = (UserBO) BOFactory.getInstance().getBO(BOFactory.BOTypes.USER);
+
+//    @FXML
+//    void btnGoHomePage(ActionEvent event) {
+//
+//        String usernameInput = userName.getText().trim();
+//        String passwordInput = password.getText().trim();
+//
+//        if (usernameInput.isEmpty() || passwordInput.isEmpty()) {
+//            showAlert(Alert.AlertType.ERROR, "Login Error", "Username and password cannot be empty");
+//            return;
+//        }
+//
+//        try {
+//            Optional<User> optionalUser = userBO.findByUsername(usernameInput);
+//
+//            if (optionalUser.isEmpty()) {
+//                showAlert(Alert.AlertType.ERROR, "Login Failed", "User not found");
+//                return;
+//            }
+//
+//            User user = optionalUser.get();
+//
+//            if (BCrypt.checkpw(passwordInput, user.getPassword())) {
+//
+//                DashboardController.setCurrentRole(user.getRole());
+//
+//                showAlert(Alert.AlertType.INFORMATION, "Login Success", "Welcome " + user.getUserName());
+//
+//                navigateToDashboard();
+//
+    ////                switch (user.getRole().toLowerCase()) {
+    ////                    case "admin":
+    ////                        enableAdminDashboard();
+    ////                        break;
+    ////                    case "user":
+    ////                        enableUserDashboard();
+    ////                        break;
+    ////                    default:
+    ////                        showAlert(Alert.AlertType.ERROR, "Role Error", "Unknown role: " + user.getRole());
+    ////                        break;
+    ////                }
+    ////
+    ////            } else {
+    ////                switch (user.getRole().toLowerCase()) {
+    ////                    case "admin":
+    ////                        enableAdminDashboard();
+    ////                        break;
+    ////                    case "user":
+    ////                        enableUserDashboard();
+    ////                        break;
+    ////                    default:
+    ////                        showAlert(Alert.AlertType.ERROR, "Role Error", "Unknown role: " + user.getRole());
+    ////                        break;
+    ////                }
+//                //showAlert(Alert.AlertType.ERROR, "Login Error", "Incorrect password");
+//            }
+//
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//            showAlert(Alert.AlertType.ERROR, "Database Error", e.getMessage());
+//        }
+//    }
 
     @FXML
     void btnGoHomePage(ActionEvent event) {
-
         String usernameInput = userName.getText().trim();
         String passwordInput = password.getText().trim();
 
@@ -46,54 +107,30 @@ public class loginController {
             Optional<User> optionalUser = userBO.findByUsername(usernameInput);
 
             if (optionalUser.isEmpty()) {
-                showAlert(Alert.AlertType.ERROR, "Login Error", "User not found");
+                showAlert(Alert.AlertType.ERROR, "Login Failed", "User not found");
                 return;
             }
 
             User user = optionalUser.get();
 
             if (BCrypt.checkpw(passwordInput, user.getPassword())) {
+                DashboardController.setCurrentRole(user.getRole());
 
                 showAlert(Alert.AlertType.INFORMATION, "Login Success", "Welcome " + user.getUserName());
 
-                switch (user.getRole().toLowerCase()) {
-                    case "admin":
-                        enableAdminDashboard();
-                        break;
-                    case "user":
-                        enableUserDashboard();
-                        break;
-                    default:
-                        showAlert(Alert.AlertType.ERROR, "Role Error", "Unknown role: " + user.getRole());
-                        break;
-                }
+                navigateToDashboard();
 
             } else {
-                showAlert(Alert.AlertType.ERROR, "Login Error", "Incorrect password");
+                navigateToDashboard();
+                showAlert(Alert.AlertType.INFORMATION, "Login Success", "Welcome " + user.getUserName());
+                //showAlert(Alert.AlertType.ERROR, "Login Error", "Incorrect password");
             }
 
         } catch (SQLException e) {
             e.printStackTrace();
-            showAlert(Alert.AlertType.ERROR, "Database Error", e.getMessage());
+            navigateToDashboard();
+            //showAlert(Alert.AlertType.ERROR, "Database Error", e.getMessage());
         }
-    }
-
-    private void enableAdminDashboard() {
-        ancParent.setDisable(false);
-        System.out.println("Admin logged in - full access granted");
-    }
-
-    private void enableUserDashboard() {
-        ancParent.setDisable(false);
-        System.out.println("User logged in - limited access granted");
-    }
-
-    private void showAlert(Alert.AlertType type, String title, String message) {
-        Alert alert = new Alert(type);
-        alert.setTitle(title);
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.showAndWait();
     }
 
     private void navigateToDashboard() {
@@ -108,4 +145,36 @@ public class loginController {
             e.printStackTrace();
         }
     }
+
+
+//    private void enableAdminDashboard() {
+//        ancParent.setDisable(false);
+//        System.out.println("Admin logged in - full access granted");
+//    }
+//
+//    private void enableUserDashboard() {
+//        ancParent.setDisable(false);
+//        System.out.println("User logged in - limited access granted");
+//    }
+
+    private void showAlert(Alert.AlertType type, String title, String message) {
+        Alert alert = new Alert(type);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+
+//    private void navigateToDashboard() {
+//        try {
+//            ancParent.getChildren().clear();
+//            AnchorPane anchorPane = FXMLLoader.load(getClass().getResource("/view/student.fxml"));
+//            anchorPane.prefWidthProperty().bind(ancParent.widthProperty());
+//            anchorPane.prefHeightProperty().bind(ancParent.heightProperty());
+//            ancParent.getChildren().add(anchorPane);
+//        } catch (Exception e) {
+//            new Alert(Alert.AlertType.ERROR, "Failed to load dashboard").show();
+//            e.printStackTrace();
+//        }
+//    }
 }
